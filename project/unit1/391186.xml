@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.6.0 (16087 thorn-03.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <relation id="391186" visible="true" version="52" changeset="48888459" timestamp="2017-05-22T13:20:09Z" user="radek-drlicka" uid="693098">
+  <member type="way" ref="427240448" role="outer"/>
+  <member type="way" ref="252567377" role="outer"/>
+  <member type="way" ref="252565978" role="outer"/>
+  <member type="way" ref="482114311" role="outer"/>
+  <member type="way" ref="252564737" role="outer"/>
+  <member type="way" ref="252551826" role="outer"/>
+  <member type="way" ref="30115061" role="outer"/>
+  <member type="way" ref="129034840" role="outer"/>
+  <member type="way" ref="482114314" role="outer"/>
+  <member type="way" ref="129034837" role="outer"/>
+  <member type="way" ref="482121533" role="outer"/>
+  <member type="way" ref="129034835" role="outer"/>
+  <member type="way" ref="322881640" role="outer"/>
+  <member type="way" ref="482199672" role="outer"/>
+  <member type="way" ref="82787728" role="outer"/>
+  <member type="way" ref="482199671" role="outer"/>
+  <member type="way" ref="82787719" role="outer"/>
+  <member type="way" ref="189113966" role="outer"/>
+  <member type="way" ref="48622352" role="outer"/>
+  <member type="way" ref="30114936" role="outer"/>
+  <member type="way" ref="166644899" role="outer"/>
+  <member type="way" ref="166644900" role="outer"/>
+  <member type="way" ref="48622351" role="outer"/>
+  <member type="way" ref="48622349" role="outer"/>
+  <member type="way" ref="349945678" role="outer"/>
+  <member type="way" ref="48622353" role="outer"/>
+  <member type="way" ref="30114950" role="outer"/>
+  <member type="way" ref="166291091" role="outer"/>
+  <member type="way" ref="30114129" role="outer"/>
+  <member type="way" ref="166291093" role="outer"/>
+  <member type="way" ref="422556113" role="outer"/>
+  <member type="way" ref="422556114" role="outer"/>
+  <member type="way" ref="48622354" role="outer"/>
+  <member type="way" ref="48622355" role="outer"/>
+  <member type="way" ref="94243554" role="outer"/>
+  <member type="way" ref="166982840" role="outer"/>
+  <member type="way" ref="166982838" role="outer"/>
+  <member type="way" ref="166291092" role="outer"/>
+  <member type="way" ref="481458190" role="outer"/>
+  <member type="way" ref="30114145" role="outer"/>
+  <member type="way" ref="481423901" role="outer"/>
+  <member type="way" ref="35153083" role="outer"/>
+  <member type="way" ref="481455663" role="outer"/>
+  <member type="way" ref="388863029" role="outer"/>
+  <member type="way" ref="481427085" role="outer"/>
+  <member type="way" ref="422555753" role="outer"/>
+  <member type="way" ref="422555752" role="outer"/>
+  <member type="way" ref="422555754" role="outer"/>
+  <member type="way" ref="422555624" role="outer"/>
+  <member type="way" ref="422555625" role="outer"/>
+  <member type="way" ref="404139838" role="outer"/>
+  <member type="way" ref="404139839" role="outer"/>
+  <member type="way" ref="374728809" role="outer"/>
+  <member type="way" ref="374728807" role="outer"/>
+  <member type="way" ref="422554762" role="outer"/>
+  <member type="way" ref="422554763" role="outer"/>
+  <member type="way" ref="422554761" role="outer"/>
+  <member type="way" ref="422558152" role="outer"/>
+  <member type="way" ref="422558151" role="outer"/>
+  <member type="way" ref="434333552" role="outer"/>
+  <member type="way" ref="388896440" role="outer"/>
+  <member type="way" ref="434333555" role="outer"/>
+  <member type="node" ref="29811182" role="admin_centre"/>
+  <member type="node" ref="305700703" role="label"/>
+  <tag k="admin_level" v="4"/>
+  <tag k="border_type" v="provincial"/>
+  <tag k="boundary" v="administrative"/>
+  <tag k="is_in:continent" v="North America"/>
+  <tag k="is_in:country" v="Canada"/>
+  <tag k="is_in:country_code" v="CA"/>
+  <tag k="ISO3166-2" v="CA-AB"/>
+  <tag k="name" v="Alberta"/>
+  <tag k="name:am" v="አልቤርታ"/>
+  <tag k="name:ar" v="ألبرتا"/>
+  <tag k="name:be" v="Правінцыя Альберта"/>
+  <tag k="name:bg" v="Албърта"/>
+  <tag k="name:cs" v="Alberta"/>
+  <tag k="name:el" v="Αλμπέρτα"/>
+  <tag k="name:en" v="Alberta"/>
+  <tag k="name:eo" v="Alberto"/>
+  <tag k="name:fa" v="آلبرتا"/>
+  <tag k="name:fr" v="Alberta"/>
+  <tag k="name:he" v="אלברטה"/>
+  <tag k="name:hi" v="अल्बर्टा"/>
+  <tag k="name:hu" v="Alberta"/>
+  <tag k="name:hy" v="Ալբերտա"/>
+  <tag k="name:is" v="Alberta"/>
+  <tag k="name:ja" v="アルバータ州"/>
+  <tag k="name:ka" v="ალბერტა"/>
+  <tag k="name:kk" v="Альберта"/>
+  <tag k="name:kn" v="ಆಲ್ಬರ್ಟಾ"/>
+  <tag k="name:ko" v="앨버타 주"/>
+  <tag k="name:lt" v="Alberta"/>
+  <tag k="name:mk" v="Алберта"/>
+  <tag k="name:mn" v="Альберта"/>
+  <tag k="name:mr" v="आल्बर्टा"/>
+  <tag k="name:oc" v="Albèrta"/>
+  <tag k="name:os" v="Альбертæ"/>
+  <tag k="name:pa" v="ਅਲਬਰਟਾ"/>
+  <tag k="name:qu" v="Alberta pruwinsya"/>
+  <tag k="name:ru" v="Альберта"/>
+  <tag k="name:sl" v="Alberta"/>
+  <tag k="name:sr" v="Алберта"/>
+  <tag k="name:ta" v="ஆல்பர்ட்டா"/>
+  <tag k="name:th" v="รัฐแอลเบอร์ตา"/>
+  <tag k="name:ug" v="Albérta"/>
+  <tag k="name:uk" v="Альберта"/>
+  <tag k="name:ur" v="البرٹا"/>
+  <tag k="name:yi" v="אלבערטא"/>
+  <tag k="name:zh" v="艾伯塔省"/>
+  <tag k="ref" v="AB"/>
+  <tag k="state_code" v="AB"/>
+  <tag k="timezone" v="America/Edmonton"/>
+  <tag k="type" v="boundary"/>
+  <tag k="wikidata" v="Q1951"/>
+  <tag k="wikipedia" v="en:Alberta"/>
+ </relation>
+</osm>
