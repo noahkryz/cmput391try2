@@ -51,13 +51,7 @@ def main():
 	root = tree.getroot()
 	closed = ''
 	limit = 1
-
-	node_count = 0
-	nodetag_count = 0
-	waypoint_count = 0
-	waytag_count = 0
-	way_count = 0
-
+	
 	node_values = []
 	nodetag_values = []
 	waypoint_values = []
