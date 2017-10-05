@@ -39,7 +39,6 @@
 #
 #
 
-
 import xml.etree.ElementTree as ET
 import sqlite3
 
@@ -47,6 +46,7 @@ def main():
 	#---HARDCODED FILE NAME---		
 	#inputFile = 'small.xml'
 	inputFile = 'edmonton.osm'
+	#-------------------------
 	tree = ET.parse(inputFile)
 	root = tree.getroot()
 	print("Finished parsing through the XML file")
