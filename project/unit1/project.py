@@ -46,7 +46,7 @@ def main():
 	#---HARDCODED FILE NAME---		
 	#inputFile = 'small.xml'
 	inputFile = 'edmonton.osm'
-	#-------------------------
+	#-------------------------	
 	tree = ET.parse(inputFile)
 	root = tree.getroot()
 	print("Finished parsing through the XML file")
@@ -192,12 +192,12 @@ def main():
 
 		way_values.append((way_id, 0))
 
-		if len(way_values) > limit:
-			c.execute("BEGIN")
-			statement = "INSERT into way values (?, ?)"#.format(way_id, closed)
-			c.executemany(statement, way_values)
-			c.execute("COMMIT")
-			way_values = []
+		# if len(way_values) > limit:
+		# 	c.execute("BEGIN")
+		# 	statement = "INSERT into way values (?, ?)"#.format(way_id, closed)
+		# 	c.executemany(statement, way_values)
+		# 	c.execute("COMMIT")
+		# 	way_values = []
 
 	c.execute("BEGIN")
 	statement = "INSERT into node values (?, ?, ?)"#.format(node_id, lat, lon)
@@ -208,8 +208,8 @@ def main():
 	c.executemany(statement, waypoint_values)
 	statement = "INSERT into waytag values (?, ?, ?)"#.format(waytag_id, waytag_k, waytag_v)
 	c.executemany(statement, waytag_values)
-	statement = "INSERT into way values (?, ?)"#.format(way_id, closed)
-	c.executemany(statement, way_values)
+	#statement = "INSERT into way values (?, ?)"#.format(way_id, closed)
+	#c.executemany(statement, way_values)
 	c.execute("COMMIT")
 	
 	#statement = "WITH ord(wayid, nodeid) AS (SELECT wayid, nodeid FROM waypoint WHERE ordinal = 0), maxord(val, wayid) AS (SELECT max(ordinal), wayid FROM waypoint GROUP BY wayid) SELECT wp.wayid FROM waypoint wp, way w, ord o, maxord mo WHERE wp.wayid = w.id AND wp.ordinal = mo.val AND wp.nodeid = o.nodeid GROUP BY wp.wayid;"
@@ -221,14 +221,30 @@ def main():
 	ordinal_last = c.fetchall()
 	#print(len(ordinal_zero))
 	#print(len(ordinal_last))
+	print("Starting the updates to way")
 
 	for i in range(len(ordinal_zero)):
+		if len(items) > limit:
+			c.execute("BEGIN")
+			statement = "INSERT into way values (?, ?)"#.format(way_id, closed)
+			c.executemany(statement, items)
+			c.execute("COMMIT")
+			items = []
 		if ordinal_zero[i] == ordinal_last[i]:
-			#item = ordinal_zero[i][0]
-			statement = "UPDATE way SET closed = 1 WHERE id = {}".format(ordinal_zero[i][0])
-			c.execute(statement)
+			items.append((ordinal_zero[i][0], 1))
+			#statement = "INSERT into way values (?, ?)"
+			# c.execute("BEGIN")
+			# statement = "UPDATE way SET closed = 1 WHERE id = {}".format(ordinal_zero[i][0])
+			# c.execute(statement)
+			# c.execute("COMMIT")
+		else:
+			items.append((ordinal_zero[i][0], 0))
 			#c.execute(statement, item)
 	
+	c.execute("BEGIN")
+	statement = "INSERT into way values (?, ?)"#.format(way_id, closed)
+	c.executemany(statement, items)
+	c.execute("COMMIT")
 
 	c.execute("PRAGMA foreign_keys = ON")
 	conn.commit()
