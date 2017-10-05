@@ -45,33 +45,38 @@ import sqlite3
 
 def main():
 	#---HARDCODED FILE NAME---		
-	inputFile = 'small.xml'
-	#inputFile = 'edmonton.osm'
+	#inputFile = 'small.xml'
+	inputFile = 'edmonton.osm'
 	tree = ET.parse(inputFile)
 	root = tree.getroot()
+	print("Finished parsing through the XML file")
 	closed = ''
-	limit = 1
-	
+	limit = 10000
+
 	node_values = []
 	nodetag_values = []
 	waypoint_values = []
 	waytag_values = []
 	way_values = []
 
+	zero = []
+	last = []
+	items = []
+
 
 #---DATABASE INITIALIZATION---
-	conn = sqlite3.connect('small.db')
+	conn = sqlite3.connect('edmonton.db')
 	conn.isolation_level = None
 	c = conn.cursor()
 #---DROP TABLES---
 	#c.execute("PRAGMA foreign_keys = ON")
 	#c.execute("isolation_level=None")
 	c.execute("PRAGMA synchronous=OFF")
-	c.execute("DROP TABLE waypoint")
-	c.execute("DROP TABLE waytag")
-	c.execute("DROP TABLE way")
-	c.execute("DROP TABLE nodetag")
-	c.execute("DROP TABLE node")
+	c.execute("DROP TABLE IF EXISTS waypoint")
+	c.execute("DROP TABLE IF EXISTS waytag")
+	c.execute("DROP TABLE IF EXISTS way")
+	c.execute("DROP TABLE IF EXISTS nodetag")
+	c.execute("DROP TABLE IF EXISTS node")
 	
 	
 	
@@ -161,25 +166,31 @@ def main():
 					c.execute("COMMIT")
 					waytag_values = []
 
-		#c.execute("BEGIN")
-		statement = "SELECT nodeid from waypoint where ordinal = 0 AND wayid = {}".format(way_id)
-		ordinal_zero = c.execute(statement)
-		#c.execute("COMMIT")
-		ordinal_zero = c.fetchall()
-		
-		#print(ordinal_zero)
-		#c.execute("BEGIN")
-		statement = "SELECT nodeid from waypoint where ordinal = {} AND wayid = {}".format(ordinality - 1, way_id)
-		ordinal_last = c.execute(statement)
-		#c.execute("COMMIT")
-		ordinal_last = c.fetchall()
-		print(ordinal_last, ordinality - 1)
-		if ordinal_zero == ordinal_last:
-		 	closed = 1
-		else:
-		 	closed = 0
+		#----------------------------------------------------
+		# #c.execute("BEGIN")
+		# statement = "SELECT nodeid from waypoint where ordinal = 0 AND wayid = {}".format(way_id)
+		# ordinal_zero = c.execute(statement)
+		# #c.execute("COMMIT")
+		# #ordinal_zero = c.fetchall()
+		# zero.append(ordinal_zero)
+		# #print(zero)
 
-		way_values.append((way_id, closed))
+		# #print(ordinal_zero)
+		# #c.execute("BEGIN")
+		# statement = "SELECT nodeid from waypoint where ordinal = {} AND wayid = {}".format(ordinality - 1, way_id)
+		# ordinal_last = c.execute(statement)
+		# #c.execute("COMMIT")
+		# #ordinal_last = c.fetchmany()
+		# last.append(ordinal_last)
+		#print(ordinal_last, ordinality - 1)
+		# if ordinal_zero == ordinal_last:
+		#  	closed = 1
+		# else:
+		#  	closed = 0
+		#----------------------------------------------------
+
+
+		way_values.append((way_id, 0))
 
 		if len(way_values) > limit:
 			c.execute("BEGIN")
@@ -200,6 +211,24 @@ def main():
 	statement = "INSERT into way values (?, ?)"#.format(way_id, closed)
 	c.executemany(statement, way_values)
 	c.execute("COMMIT")
+	
+	#statement = "WITH ord(wayid, nodeid) AS (SELECT wayid, nodeid FROM waypoint WHERE ordinal = 0), maxord(val, wayid) AS (SELECT max(ordinal), wayid FROM waypoint GROUP BY wayid) SELECT wp.wayid FROM waypoint wp, way w, ord o, maxord mo WHERE wp.wayid = w.id AND wp.ordinal = mo.val AND wp.nodeid = o.nodeid GROUP BY wp.wayid;"
+	statement = "SELECT wayid, nodeid FROM waypoint WHERE ordinal = 0"
+	ordinal_zero = c.execute(statement)
+	ordinal_zero = ordinal_zero.fetchall()
+	statement = "WITH find(ordinal, nodeid, wayid) AS (SELECT max(ordinal), nodeid, wayid FROM waypoint GROUP BY wayid) SELECT w.wayid, w.nodeid FROM find f, waypoint w WHERE f.ordinal = w.ordinal AND f.wayid = w.wayid;"
+	ordinal_last = c.execute(statement)
+	ordinal_last = c.fetchall()
+	#print(len(ordinal_zero))
+	#print(len(ordinal_last))
+
+	for i in range(len(ordinal_zero)):
+		if ordinal_zero[i] == ordinal_last[i]:
+			#item = ordinal_zero[i][0]
+			statement = "UPDATE way SET closed = 1 WHERE id = {}".format(ordinal_zero[i][0])
+			c.execute(statement)
+			#c.execute(statement, item)
+	
 
 	c.execute("PRAGMA foreign_keys = ON")
 	conn.commit()

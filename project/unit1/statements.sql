@@ -41,3 +41,30 @@ FROM waypoint wp, way w, ord o, maxord mo
 WHERE wp.wayid = w.id AND wp.ordinal = mo.val AND wp.nodeid = o.nodeid
 GROUP BY wp.wayid;
 #wp.wayid, wp.nodeid, o.nodeid
+
+
+WITH find(ordinal, nodeid, wayid) AS (
+SELECT max(ordinal), nodeid, wayid FROM waypoint GROUP BY wayid
+)
+SELECT w.wayid, w.nodeid
+FROM find f, waypoint w
+WHERE f.ordinal = w.ordinal AND f.wayid = w.wayid;
+
+WITH find(wayid, node) AS (
+SELECT wayid, nodeid FROM waypoint WHERE ordinal = 0
+)
+SELECT count(*)
+FROM find;
+
+SELECT wayid, nodeid FROM waypoint WHERE ordinal = 0
+
+UPDATE way SET closed = ?
+
+
+
+
+
+
+
+
+
